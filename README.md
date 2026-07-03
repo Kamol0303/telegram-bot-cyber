@@ -1,46 +1,49 @@
-<p align="left">
-</p>
 <p align="center">
-</p>
-<p align="center">
-<a href="#"><img title="Open Source" src="https://img.shields.io/badge/Open%20Source-%E2%9D%A4-green?style=for-the-badge"></a>
-</p>
-<p align="center">
+<b>🛡️ Cyber Hygiene Awareness Training Platform</b>
 </p>
 
-## Installation :
+> Ta'lim maqsadidagi phishing simulyatsiyasi — Telegram bot + Web platforma
 
-* `apt update`
-* `apt install git curl php openssh-server -y`
-* `git clone git://github.com/Optane002/ZPhisher.git`
-* `cd ZPhisher`
-#### > Run : `bash ZPhisher.sh`
+---
 
-## Single Command :
+## ⚡ Tezkor ishga tushirish
+
+```bash
+cd ~/telegram-bot-cyber
+sudo chown -R $USER:$USER .git    # git xato bo'lsa
+git pull origin main
+bash setup.sh
+nano cyber-hygiene-training/.env   # TELEGRAM_BOT_TOKEN kiriting
+bash scripts/start-training.sh
 ```
-apt update ; apt install git curl php openssh-server -y ; git clone git://github.com/Optane002/ZPhisher.git ; cd ZPhisher ; bash ZPhisher.sh
+
+**To'xtatish:** `bash scripts/stop-training.sh`
+
+📖 To'liq qo'llanma: [QUICKSTART_UZ.md](QUICKSTART_UZ.md)
+
+---
+
+## Papka tuzilmasi
+
 ```
-<br>
-<p align="center">
-<img width="51%" src="https://github.com/Optane002/ZPhisher/blob/docker-legacy/Kali%20Linux%2023_10_2020%2001_03_00.png"/>
-</p>
+telegram-bot-cyber/
+├── setup.sh / start.sh / stop.sh     ← shu buyruqlardan foydalaning
+├── scripts/start-training.sh
+└── cyber-hygiene-training/           ← asosiy kod
+```
 
-## Features :
-#### [+] Latest Login Pages !
-#### [+] New Instagram Auto Follower Page !
-#### [+] 4 Port Forwarding Options !
-#### [+] Easy for Beginners !
+---
 
-## Credits :
-#### > TheLinuxChoice (https://github.com/thelinuxchoice)
-#### > DarksecDevelopers (https://github.com/DarksecDevelopers)
-#### > UndeadSec (https://github.com/UndeadSec)
-#### > Equinockx (https://github.com/MoisesTapia)
+## Platformalar
 
-## Tunelling Options :
-#### > Localhost (127.0.0.1)
-#### > NGROK (https://ngrok.com)
-#### > SERVEO (https://serveo.net)
-#### > LOCALHOSTRUN (https://localhost.run)
+| OS | O'rnatish | Ishga tushirish |
+|----|-----------|-----------------|
+| Kali/Linux | `bash setup.sh` | `bash scripts/start-training.sh` |
+| Termux | `bash setup.sh` | `bash scripts/start-training.sh` |
+| Windows | `cyber-hygiene-training\setup.bat` | `start.bat` |
 
+---
 
+## Eski ZPhisher
+
+Eski zphisher hali `zphisher.sh` da mavjud. Yangi ta'lim platformasi — `cyber-hygiene-training/` papkasida.
