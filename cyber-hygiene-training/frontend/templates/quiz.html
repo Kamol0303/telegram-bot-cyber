@@ -1,42 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cybersecurity Knowledge Quiz</title>
+  <title>Cybersecurity Quiz</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
+<body data-page-title="quiz.title">
   <div class="container py-5" style="max-width: 700px;">
-    <h1 class="text-center mb-4" style="color: var(--cyber-blue);">📝 Cybersecurity Quiz</h1>
-    <p class="text-center text-muted">10 questions to test your awareness</p>
+    <h1 class="text-center mb-4" style="color: var(--cyber-blue);" data-i18n="quiz.title"></h1>
+    <p class="text-center text-muted" data-i18n="quiz.subtitle"></p>
 
     <div id="quiz-form">
-      <p class="text-center text-info" id="quiz-progress">Loading...</p>
+      <p class="text-center text-info" id="quiz-progress" data-i18n="quiz.loading"></p>
       <h3 id="quiz-question" class="mb-4"></h3>
       <div id="quiz-options"></div>
       <div class="d-flex justify-content-between mt-4">
-        <button class="cyber-btn" id="quiz-prev" style="display:none;">← Previous</button>
-        <button class="cyber-btn" id="quiz-next">Next →</button>
-        <button class="cyber-btn" id="quiz-submit" style="display:none;">Submit Quiz</button>
+        <button class="cyber-btn" id="quiz-prev" style="display:none;" data-i18n="quiz.prev"></button>
+        <button class="cyber-btn" id="quiz-next" data-i18n="quiz.next"></button>
+        <button class="cyber-btn" id="quiz-submit" style="display:none;" data-i18n="quiz.submit"></button>
       </div>
     </div>
 
     <div id="quiz-results" class="d-none">
       <div class="text-center mb-4">
-        <h2 style="color: var(--cyber-green);">Quiz Complete!</h2>
+        <h2 style="color: var(--cyber-green);" data-i18n="quiz.complete"></h2>
         <p class="fs-3" id="quiz-score"></p>
       </div>
-      <h4 class="mb-3">Detailed Explanations:</h4>
+      <h4 class="mb-3" data-i18n="quiz.explanations_title"></h4>
       <div id="quiz-explanations"></div>
       <div class="text-center mt-4">
-        <a href="/certificate" id="cert-link" class="cyber-btn btn-lg">🏆 View Certificate</a>
+        <a href="/certificate" id="cert-link" class="cyber-btn btn-lg" data-i18n="quiz.cert_btn"></a>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/i18n.js"></script>
   <script src="/static/js/app.js"></script>
   <script src="/static/js/quiz.js"></script>
 </body>

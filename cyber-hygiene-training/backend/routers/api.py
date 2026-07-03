@@ -88,9 +88,9 @@ async def update_progress(
 
 
 @router.get("/quiz/questions")
-async def get_quiz_questions():
+async def get_quiz_questions(lang: str = "uz"):
     """Return quiz questions without correct answers."""
-    return {"questions": get_questions_for_client()}
+    return {"questions": get_questions_for_client(lang)}
 
 
 @router.post("/quiz/submit", response_model=QuizSubmitResponse)
@@ -110,7 +110,7 @@ async def submit_quiz_answers(
                 detail="Sensitive data cannot be submitted to this API.",
             )
 
-    result = await submit_quiz(db, body.session_token, body.answers)
+    result = await submit_quiz(db, body.session_token, body.answers, body.lang or "uz")
     if not result:
         raise HTTPException(status_code=400, detail="Invalid session or quiz already completed")
     return QuizSubmitResponse(**result)

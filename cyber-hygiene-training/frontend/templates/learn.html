@@ -1,73 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cybersecurity Learning — Awareness Training</title>
+  <title>Cybersecurity Learning</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body class="learn-page">
+<body class="learn-page" data-page-title="learn.title">
   <div class="container py-5">
-    <h1 class="text-center mb-2" style="color: var(--cyber-blue);">🛡️ Cybersecurity Awareness</h1>
-    <p class="text-center text-muted mb-5">Learn to recognize and defend against online threats</p>
+    <h1 class="text-center mb-2" style="color: var(--cyber-blue);" data-i18n="learn.title"></h1>
+    <p class="text-center text-muted mb-5" data-i18n="learn.subtitle"></p>
 
     <div class="learn-card">
-      <h3>🎣 How Phishing Works</h3>
-      <p>Phishing is a cyberattack where criminals impersonate trusted entities to trick you into revealing sensitive information. They use fake emails, messages, and websites that look legitimate. The goal is to steal passwords, payment cards, or install malware.</p>
+      <h3 data-i18n="learn.phishing_title"></h3>
+      <p data-i18n="learn.phishing_text"></p>
     </div>
 
     <div class="learn-card">
-      <h3>🎰 Fake Lotteries</h3>
-      <p>Scammers announce you've won prizes you never entered to win. They request personal information or small "processing fees." Legitimate lotteries never ask winners to pay upfront or provide banking details via unsolicited messages.</p>
+      <h3 data-i18n="learn.lottery_title"></h3>
+      <p data-i18n="learn.lottery_text"></p>
     </div>
 
     <div class="learn-card">
-      <h3>📱 Telegram Scams</h3>
-      <p>Telegram's popularity makes it a prime target. Scammers send prize messages, fake investment opportunities, or impersonate support staff. Always verify bot identities and never share verification codes through Telegram.</p>
+      <h3 data-i18n="learn.telegram_title"></h3>
+      <p data-i18n="learn.telegram_text"></p>
     </div>
 
     <div class="learn-card">
-      <h3>📷 QR-Code Attacks (Quishing)</h3>
-      <p>Malicious QR codes redirect to phishing sites or trigger malware downloads. Always preview URLs before visiting. Be especially cautious with QR codes in public places or unsolicited messages.</p>
+      <h3 data-i18n="learn.qr_title"></h3>
+      <p data-i18n="learn.qr_text"></p>
     </div>
 
     <div class="learn-card">
-      <h3>💳 Fake Payment Pages</h3>
-      <p>Scam websites mimic real banking and payment interfaces. Warning signs include suspicious domains, missing security indicators, poor grammar, and requests for unusual information like SMS codes alongside card details.</p>
+      <h3 data-i18n="learn.payment_title"></h3>
+      <p data-i18n="learn.payment_text"></p>
     </div>
 
     <div class="learn-card">
-      <h3>🧠 Social Engineering</h3>
-      <p>Attackers manipulate human psychology rather than technical systems. They exploit trust, authority, urgency, and curiosity. The best defense is skepticism and verification through official channels.</p>
+      <h3 data-i18n="learn.social_title"></h3>
+      <p data-i18n="learn.social_text"></p>
     </div>
 
     <div class="row">
       <div class="col-md-6">
         <div class="learn-card">
-          <h3>⏰ Urgency Tactics</h3>
-          <p>Countdown timers, "limited spots," and "act now" messages pressure you to skip verification. Legitimate organizations give you time to make informed decisions.</p>
+          <h3 data-i18n="learn.urgency_title"></h3>
+          <p data-i18n="learn.urgency_text"></p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="learn-card">
-          <h3>😨 Fear Tactics</h3>
-          <p>Messages threatening account closure, legal action, or lost prizes create panic. Scammers want you to act before thinking. Pause, verify, and contact organizations directly.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="learn-card">
-          <h3>🎁 Reward Manipulation</h3>
-          <p>Too-good-to-be-true prizes exploit greed and excitement. If you didn't enter a contest, you didn't win. Free luxury cars and millions in cash are almost always scams.</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="learn-card">
-          <h3>📲 OTP Theft</h3>
-          <p>SMS verification codes are the keys to your accounts. Scammers who obtain your card number will call or message asking for the code. Banks never ask for your OTP — ever.</p>
+          <h3 data-i18n="learn.fear_title"></h3>
+          <p data-i18n="learn.fear_text"></p>
         </div>
       </div>
     </div>
@@ -75,23 +60,39 @@
     <div class="row">
       <div class="col-md-6">
         <div class="learn-card">
-          <h3>🪪 Identity Theft</h3>
-          <p>Personal information collected through scams enables identity fraud — opening accounts, taking loans, or committing crimes in your name. Guard your name, ID numbers, and contact details carefully.</p>
+          <h3 data-i18n="learn.reward_title"></h3>
+          <p data-i18n="learn.reward_text"></p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="learn-card">
-          <h3>💸 Card Fraud</h3>
-          <p>Entering card details on fake sites gives criminals everything needed for unauthorized purchases. Combined with OTP theft, they can drain accounts within minutes.</p>
+          <h3 data-i18n="learn.otp_title"></h3>
+          <p data-i18n="learn.otp_text"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="learn-card">
+          <h3 data-i18n="learn.identity_title"></h3>
+          <p data-i18n="learn.identity_text"></p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="learn-card">
+          <h3 data-i18n="learn.fraud_title"></h3>
+          <p data-i18n="learn.fraud_text"></p>
         </div>
       </div>
     </div>
 
     <div class="text-center mt-5">
-      <a href="/quiz" class="cyber-btn btn-lg">📝 Test Your Knowledge — Take the Quiz</a>
+      <a href="/quiz" class="cyber-btn btn-lg" data-i18n="learn.quiz_btn"></a>
     </div>
   </div>
 
+  <script src="/static/js/i18n.js"></script>
   <script src="/static/js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {

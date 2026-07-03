@@ -118,6 +118,21 @@ async function updateProgress(flags) {
 }
 
 /**
+ * Format card expiry as MM/YY — digits only, max 4, slash after month.
+ */
+function formatExpiryInput(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 4);
+  if (digits.length <= 2) return digits;
+  return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+}
+
+function isValidExpiry(value) {
+  if (!/^\d{2}\/\d{2}$/.test(value)) return false;
+  const month = parseInt(value.split('/')[0], 10);
+  return month >= 1 && month <= 12;
+}
+
+/**
  * Format card input with spaces (display only).
  */
 function formatCardInput(value) {
@@ -164,22 +179,23 @@ function startCountdown(elementId, seconds) {
  * Animated winner ticker for fake lottery page.
  */
 function initWinnerTicker() {
-  const names = [
-    'Akmal T. BYD Champion yutdi!',
-    'Dilnoza K. iPhone 17 oldi!',
-    'Jasur M. 5 000 000 UZS yutdi!',
-    'Nodira S. kvartira sohibi bo\'ldi!',
-    'Bobur R. hashamatli avto yutdi!',
-    'Malika H. iPhone 17 qo\'lga kiritdi!',
-    'Sardor A. 5 000 000 UZS oldi!',
-    'Gulnoza P. BYD Champion yutib oldi!',
+  const keys = [
+    'landing.ticker_1', 'landing.ticker_2', 'landing.ticker_3', 'landing.ticker_4',
+    'landing.ticker_5', 'landing.ticker_6', 'landing.ticker_7', 'landing.ticker_8',
   ];
   const ticker = document.getElementById('winner-ticker-text');
-  if (ticker) {
-    ticker.textContent = names.join('  ★  ') + '  ★  ';
-  }
+  if (!ticker) return;
+  const names = keys.map((k) => (typeof t === 'function' ? t(k) : k));
+  ticker.textContent = names.join('  ★  ') + '  ★  ';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initSessionFromUrl();
+  if (typeof initI18n === 'function') {
+    initI18n();
+  }
+});
+
+window.addEventListener('languageChanged', () => {
+  initWinnerTicker();
 });

@@ -1,60 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificate of Completion</title>
+  <title>Certificate</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
+<body data-page-title="certificate.title">
   <div class="container py-5" style="max-width: 800px;">
     <div class="certificate" id="certificate">
       <div style="position: relative; z-index: 1;">
-        <p class="text-muted mb-1">CYBER HYGIENE AWARENESS TRAINING</p>
-        <h1 class="cert-title">Certificate of Completion</h1>
+        <p class="text-muted mb-1" data-i18n="certificate.header"></p>
+        <h1 class="cert-title" data-i18n="certificate.cert_title"></h1>
         <hr style="border-color: var(--cyber-blue); width: 60%; margin: 1.5rem auto;">
-        <p>This certifies that</p>
+        <p data-i18n="certificate.certifies"></p>
         <p class="cert-name" id="cert-name">Trainee</p>
-        <p>has successfully completed the</p>
-        <p class="fs-5 fw-bold">Cybersecurity Awareness Training Program</p>
-        <p>including phishing simulation, educational modules, and knowledge assessment.</p>
+        <p data-i18n="certificate.completed"></p>
+        <p class="fs-5 fw-bold" data-i18n="certificate.program"></p>
+        <p data-i18n="certificate.includes"></p>
         <div class="row mt-4">
           <div class="col-4">
-            <p class="text-muted small">Score</p>
+            <p class="text-muted small" data-i18n="certificate.score_label"></p>
             <p class="fs-4 fw-bold" style="color: var(--cyber-green);" id="cert-score">—</p>
           </div>
           <div class="col-4">
-            <p class="text-muted small">Certificate ID</p>
+            <p class="text-muted small" data-i18n="certificate.id_label"></p>
             <p class="fw-bold" id="cert-id">—</p>
           </div>
           <div class="col-4">
-            <p class="text-muted small">Date</p>
+            <p class="text-muted small" data-i18n="certificate.date_label"></p>
             <p class="fw-bold" id="cert-date">—</p>
           </div>
         </div>
         <hr style="border-color: var(--cyber-blue); width: 40%; margin: 2rem auto;">
-        <p class="text-muted small">
-          This certificate confirms participation in an educational cybersecurity simulation.
-          No real personal or financial data was collected during this training.
-        </p>
+        <p class="text-muted small" data-i18n="certificate.footer"></p>
       </div>
     </div>
 
     <div class="text-center mt-4">
-      <button class="cyber-btn me-2" onclick="window.print()">🖨️ Print Certificate</button>
-      <a href="/learn" class="cyber-btn">📚 Review Learning Materials</a>
+      <button class="cyber-btn me-2" onclick="window.print()" data-i18n="certificate.print_btn"></button>
+      <a href="/learn" class="cyber-btn" data-i18n="certificate.review_btn"></a>
     </div>
   </div>
 
-  <div class="disclaimer-bar">
-    🛡️ EDUCATIONAL SIMULATION COMPLETE — Stay vigilant and protect your digital identity
-  </div>
+  <div class="disclaimer-bar" data-i18n="certificate.disclaimer"></div>
 
+  <script src="/static/js/i18n.js"></script>
   <script src="/static/js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('cert-name').textContent = getDisplayName();
+      const name = getDisplayName();
+      document.getElementById('cert-name').textContent =
+        name && name !== 'Trainee' ? name : t('certificate.trainee');
 
       const params = new URLSearchParams(window.location.search);
       const result = getQuizResult();
@@ -65,9 +63,20 @@
       document.getElementById('cert-score').textContent =
         scoreVal !== null ? `${scoreVal}%` : '—';
       document.getElementById('cert-id').textContent = certId;
-      document.getElementById('cert-date').textContent = new Date().toLocaleDateString('en-US', {
-        year: 'numeric', month: 'long', day: 'numeric'
-      });
+      document.getElementById('cert-date').textContent = new Date().toLocaleDateString(
+        getLocaleForDate(),
+        { year: 'numeric', month: 'long', day: 'numeric' }
+      );
+    });
+
+    window.addEventListener('languageChanged', () => {
+      const name = getDisplayName();
+      document.getElementById('cert-name').textContent =
+        name && name !== 'Trainee' ? name : t('certificate.trainee');
+      document.getElementById('cert-date').textContent = new Date().toLocaleDateString(
+        getLocaleForDate(),
+        { year: 'numeric', month: 'long', day: 'numeric' }
+      );
     });
   </script>
 </body>

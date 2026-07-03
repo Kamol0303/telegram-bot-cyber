@@ -642,3 +642,71 @@ body {
   .claim-btn { font-size: 1.2rem; padding: 0.75rem 2rem; }
   .certificate { padding: 1.5rem; }
 }
+
+/* Language switcher — UZ / RU / EN */
+.lang-switcher {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  display: flex;
+  gap: 4px;
+  background: rgba(10, 10, 15, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  color: var(--cyber-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.lang-btn:hover {
+  color: var(--cyber-text);
+  background: rgba(0, 212, 255, 0.12);
+}
+
+.lang-btn.active {
+  background: var(--cyber-blue);
+  color: #0a0a0f;
+}
+
+.bank-page .lang-switcher {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #003d7a;
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.15);
+}
+
+.bank-page .lang-btn {
+  color: #5a6a7a;
+}
+
+.bank-page .lang-btn:hover {
+  color: #003d7a;
+  background: rgba(0, 61, 122, 0.08);
+}
+
+.bank-page .lang-btn.active {
+  background: #003d7a;
+  color: #fff;
+}
+
+.scam-page .lang-switcher {
+  background: rgba(26, 10, 0, 0.9);
+  border-color: var(--scam-gold);
+}
+
+.scam-page .lang-btn.active {
+  background: var(--scam-gold);
+  color: #1a0a00;
+}

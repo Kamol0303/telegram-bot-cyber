@@ -54,6 +54,7 @@ class QuizSubmitRequest(BaseModel):
     answers: Dict[str, int] = Field(
         ..., description="Map of question_id (string) to selected option index"
     )
+    lang: Optional[str] = Field("uz", description="Response language: uz, ru, en")
     display_name: Optional[str] = Field(
         None, description="Optional name for certificate — stays in request only"
     )

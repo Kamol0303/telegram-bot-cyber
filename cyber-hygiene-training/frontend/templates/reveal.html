@@ -3,55 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚠️ DIQQAT!</title>
+  <title>DIQQAT!</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body class="reveal-page">
+<body class="reveal-page" data-page-title="reveal.title">
   <div class="reveal-overlay"></div>
   <div class="reveal-container">
     <div class="warning-icon reveal-shake">⚠️</div>
-    <h1 class="reveal-title reveal-fade">DIQQAT!</h1>
-    <h2 class="reveal-subtitle reveal-fade">TO'XTANG!</h2>
+    <h1 class="reveal-title reveal-fade" data-i18n="reveal.heading"></h1>
+    <h2 class="reveal-subtitle reveal-fade" data-i18n="reveal.stop"></h2>
 
     <div class="reveal-box reveal-fade">
-      <p class="reveal-message fs-4 text-danger fw-bold mb-4">
-        Bu kiberxavfsizlik bo'yicha ta'lim simulyatsiyasi edi.
-      </p>
-      <p class="reveal-message">
-        Agar bu haqiqiy firibgarlik sayti bo'lganida, shaxsiy ma'lumotlaringiz,
-        bank karta raqamingiz va SMS kodlaringiz kiberjinoyatchilarga
-        <strong>o'g'irlanishi</strong> mumkin edi.
-      </p>
+      <p class="reveal-message fs-4 text-danger fw-bold mb-4" data-i18n="reveal.main_msg"></p>
+      <p class="reveal-message" data-i18n-html="reveal.detail_msg"></p>
     </div>
 
     <div class="remember-list reveal-fade">
-      <h4 class="text-danger">⚠️ Esda tuting:</h4>
+      <h4 class="text-danger" data-i18n="reveal.remember_title"></h4>
       <ul>
-        <li>Noma'lum saytlarda bank karta raqamini kiritmang</li>
-        <li>SMS tasdiqlash kodlarini hech kimga bermang</li>
-        <li>Haqiqatda bo'lishi mumkin bo'lmagan sovrinlarga ishonmang</li>
-        <li>Sayt manzilini doim tekshiring (firibgarlar o'xshash domen ishlatadi)</li>
-        <li>HTTPS borligi yetarli emas — domen ham muhim</li>
-        <li>Telegramdagi shubhali havolalarni bosmang</li>
-        <li>Shoshilish hissi yaratish — firibgarlar usuli</li>
-        <li>Raqamli shaxsingizni himoya qiling</li>
+        <li data-i18n="reveal.tip1"></li>
+        <li data-i18n="reveal.tip2"></li>
+        <li data-i18n="reveal.tip3"></li>
+        <li data-i18n="reveal.tip4"></li>
+        <li data-i18n="reveal.tip5"></li>
+        <li data-i18n="reveal.tip6"></li>
+        <li data-i18n="reveal.tip7"></li>
+        <li data-i18n="reveal.tip8"></li>
       </ul>
     </div>
 
     <div class="reveal-disclaimer reveal-fade">
-      <p>
-        🛡️ <strong>Muhim:</strong> Bu faqat ta'lim maqsadidagi simulyatsiya edi.
-        Hech qanday haqiqiy to'lov kartasi, parol yoki SMS kodi yig'ilmadi va saqlanmadi.
-      </p>
+      <p data-i18n-html="reveal.disclaimer"></p>
     </div>
 
     <div class="mt-5 reveal-fade">
-      <a href="/learn" class="cyber-btn btn-lg me-2 mb-2">📚 Batafsil o'rganish</a>
-      <a href="/quiz" class="cyber-btn btn-lg mb-2">📝 Bilim testi</a>
+      <a href="/learn" class="cyber-btn btn-lg me-2 mb-2" data-i18n="reveal.learn_btn"></a>
+      <a href="/quiz" class="cyber-btn btn-lg mb-2" data-i18n="reveal.quiz_btn"></a>
     </div>
   </div>
 
+  <script src="/static/js/i18n.js"></script>
   <script src="/static/js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {

@@ -21,6 +21,7 @@ async def submit_quiz(
     db: AsyncSession,
     session_token: str,
     answers: dict,
+    lang: str = "uz",
 ) -> dict | None:
     """Grade quiz and persist only score metadata — never sensitive inputs."""
     session = await get_session_by_token(db, session_token)
@@ -33,7 +34,7 @@ async def submit_quiz(
     if existing.scalar_one_or_none():
         return None
 
-    score, total, results = grade_quiz(answers)
+    score, total, results = grade_quiz(answers, lang)
     percentage = round((score / total) * 100, 1)
     cert_id = generate_certificate_id()
 
