@@ -21,41 +21,31 @@ Telegram Bot → Educational Landing Page → Cyber Awareness Simulation → Exp
 - **Completion Certificate** — Issued after quiz completion
 - **Admin Panel** — Anonymous analytics dashboard
 
-## Quick Start
+## Quick Start (barcha platformalar)
+
+| Platforma | O'rnatish | Ishga tushirish |
+|-----------|-----------|-----------------|
+| **Windows** | `setup.bat` | `start.bat` |
+| **Linux** | `bash setup.sh` | `bash start.sh` |
+| **Termux** | `bash setup.sh` | `bash start.sh` |
+| **macOS** | `bash setup.sh` | `bash start.sh` |
 
 ```bash
-cd cyber-hygiene-training
-cp .env.example .env
-# Edit .env — set TELEGRAM_BOT_TOKEN, SECRET_KEY, ADMIN_PASSWORD
-
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Terminal 1 — Backend
-uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
-
-# Terminal 2 — Telegram Bot
-python -m bot.main
+# Yoki Python launcher (har qanday OS):
+python scripts/launcher.py setup
+python scripts/launcher.py start
+python scripts/launcher.py stop
 ```
 
-Or use Docker:
+`.env` ni sozlang: `TELEGRAM_BOT_TOKEN`, `NGROK_AUTHTOKEN`, `SECRET_KEY`
+
+Batafsil: **[Cross-Platform qo'llanma (O'zbekcha)](docs/CROSS_PLATFORM_UZ.md)**
+
+Docker:
 
 ```bash
 docker compose up --build
 ```
-
-## Termux (Android telefon)
-
-```bash
-bash scripts/termux-setup.sh    # bir marta
-nano .env
-bash scripts/start-training.sh # tunnel tanlash bilan
-```
-
-Tunnel turlari (zphisher dan): LocalHost, Ngrok, Serveo, Localhost.run
-
-Batafsil: [docs/TERMUX_UZ.md](docs/TERMUX_UZ.md)
 
 ## URLs
 
@@ -76,10 +66,11 @@ Batafsil: [docs/TERMUX_UZ.md](docs/TERMUX_UZ.md)
 - OTP codes are **randomly generated** training codes — real banking codes are never accepted
 - Name/phone from bot are passed via **URL fragment** (never sent to server)
 - Server stores only **anonymous session tokens** and quiz scores
-- Clear **educational disclaimer** displayed throughout
+- Clear **educational disclaimer** shown only at the final reveal step
 
 ## Documentation
 
+- [Cross-Platform Guide (O'zbekcha)](docs/CROSS_PLATFORM_UZ.md)
 - [Installation Guide](docs/INSTALLATION.md)
 - [Termux Guide (O'zbekcha)](docs/TERMUX_UZ.md)
 - [Deployment Guide](docs/DEPLOYMENT.md)
