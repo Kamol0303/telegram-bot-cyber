@@ -45,6 +45,20 @@ Or use Docker:
 docker compose up --build
 ```
 
+## Termux (Android telefon)
+
+Telefonda Termux orqali ishga tushirish:
+
+```bash
+cd cyber-hygiene-training
+bash scripts/termux-setup.sh    # bir marta — o'rnatish
+nano .env                        # token va parolni sozlash
+bash scripts/start-termux.sh    # ishga tushirish
+bash scripts/stop-termux.sh     # to'xtatish
+```
+
+Batafsil o'zbekcha qo'llanma: [docs/TERMUX_UZ.md](docs/TERMUX_UZ.md)
+
 ## URLs
 
 | URL | Description |
@@ -69,6 +83,7 @@ docker compose up --build
 ## Documentation
 
 - [Installation Guide](docs/INSTALLATION.md)
+- [Termux Guide (O'zbekcha)](docs/TERMUX_UZ.md)
 - [Deployment Guide](docs/DEPLOYMENT.md)
 - [Security Review](docs/SECURITY_REVIEW.md)
 - [Threat Model](docs/THREAT_MODEL.md)

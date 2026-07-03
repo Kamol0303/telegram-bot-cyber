@@ -127,4 +127,18 @@ Expected response:
 | Bot can't reach backend | Ensure `BASE_URL` is accessible from the bot process |
 | Database errors | Check `data/` directory permissions |
 | Import errors | Set `PYTHONPATH` to project root |
-| CORS errors | Add your domain to `CORS_ORIGINS` in `.env |
+| CORS errors | Add your domain to `CORS_ORIGINS` in `.env` |
+
+## Termux (Android)
+
+For running on Android phones with Termux, see the dedicated guide:
+
+**[Termux Guide (O'zbekcha)](TERMUX_UZ.md)**
+
+Quick commands:
+
+```bash
+bash scripts/termux-setup.sh
+nano .env
+bash scripts/start-termux.sh
+```
