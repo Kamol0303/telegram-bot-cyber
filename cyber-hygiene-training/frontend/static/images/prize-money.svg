@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <rect width="400" height="200" fill="#1a2e1a"/>
+  <text x="200" y="80" text-anchor="middle" fill="#00ff88" font-size="36" font-family="Arial" font-weight="bold">5,000,000</text>
+  <text x="200" y="120" text-anchor="middle" fill="#ffb800" font-size="28" font-family="Arial" font-weight="bold">UZS</text>
+  <rect x="100" y="140" width="200" height="30" rx="5" fill="#2a4a2a" stroke="#00ff88" stroke-width="1"/>
+  <text x="200" y="162" text-anchor="middle" fill="#00ff88" font-size="14" font-family="Arial">CASH PRIZE</text>
+</svg>

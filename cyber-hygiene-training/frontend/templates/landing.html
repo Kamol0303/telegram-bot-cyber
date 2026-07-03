@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 MEGA LUCKY WIN — Claim Your Prize NOW!</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="scam-page">
+  <div class="scam-header">
+    <marquee>🔥 URGENT! Only 3 prizes left! Claim before time runs out! 🔥</marquee>
+  </div>
+
+  <div class="container py-4">
+    <div class="text-center mb-2">
+      <small class="scam-domain">https://mega-lukcy-w1n-pr1ze.tk/claim-now</small>
+    </div>
+    <h1 class="text-center text-warning fw-bold display-4">
+      🏆 CONGRATULATIONS! YOU ARE A WINNER! 🏆
+    </h1>
+    <p class="text-center grammar-error">
+      You has been select for exclusive reward! Dont miss this chance!!!
+    </p>
+
+    <div class="row justify-content-center my-4">
+      <div class="col-md-6">
+        <p class="text-center text-danger fw-bold">⏰ OFFER EXPIRES IN:</p>
+        <div class="countdown-box" id="countdown">04:59</div>
+      </div>
+    </div>
+
+    <div class="winner-ticker mb-4">
+      <span id="winner-ticker-text">Loading winners...</span>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-4 col-lg">
+        <div class="prize-card">
+          <img src="/static/images/prize-byd.svg" alt="BYD Champion" class="prize-img mb-2">
+          <h5 class="text-warning">BYD Champion</h5>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg">
+        <div class="prize-card">
+          <img src="/static/images/prize-iphone.svg" alt="iPhone 17" class="prize-img mb-2">
+          <h5 class="text-warning">iPhone 17</h5>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg">
+        <div class="prize-card">
+          <img src="/static/images/prize-money.svg" alt="5,000,000 UZS" class="prize-img mb-2">
+          <h5 class="text-warning">5,000,000 UZS</h5>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg">
+        <div class="prize-card">
+          <img src="/static/images/prize-apartment.svg" alt="Apartment" class="prize-img mb-2">
+          <h5 class="text-warning">Apartment</h5>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg">
+        <div class="prize-card">
+          <img src="/static/images/prize-car.svg" alt="Luxury Car" class="prize-img mb-2">
+          <h5 class="text-warning">Luxury Car</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <p class="text-danger fw-bold fs-5">⚠️ ACT NOW! 2,847 people already claimed today!</p>
+      <button class="claim-btn" id="claim-btn">🎁 CLAIM NOW — FREE! 🎁</button>
+    </div>
+
+    <div class="text-center mt-4">
+      <p class="text-muted small">
+        * This website intentionally contains warning signs of phishing for educational purposes.
+      </p>
+    </div>
+  </div>
+
+  <div class="disclaimer-bar">
+    🛡️ EDUCATIONAL CYBERSECURITY SIMULATION — No real prizes. No data collected.
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      startCountdown('countdown', 299);
+      initWinnerTicker();
+      updateProgress({ landing_viewed: true });
+
+      document.getElementById('claim-btn').addEventListener('click', () => {
+        window.location.href = '/simulation';
+      });
+    });
+  </script>
+</body>
+</html>

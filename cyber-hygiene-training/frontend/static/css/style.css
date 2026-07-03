@@ -1,0 +1,412 @@
+/* Cyber Hygiene Awareness Training — Global Styles */
+
+:root {
+  --cyber-bg: #0a0a0f;
+  --cyber-surface: #12121a;
+  --cyber-card: #1a1a2e;
+  --cyber-red: #ff2d55;
+  --cyber-red-glow: rgba(255, 45, 85, 0.4);
+  --cyber-green: #00ff88;
+  --cyber-blue: #00d4ff;
+  --cyber-yellow: #ffd700;
+  --cyber-text: #e8e8f0;
+  --cyber-muted: #8888a0;
+  --scam-gold: #ffb800;
+  --scam-red: #e63946;
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--cyber-bg);
+  color: var(--cyber-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scam landing page theme */
+.scam-page {
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1810 50%, #1a0505 100%);
+  min-height: 100vh;
+}
+
+.scam-header {
+  background: linear-gradient(90deg, var(--scam-gold), #ff6b00);
+  padding: 0.5rem;
+  text-align: center;
+  animation: pulse-banner 2s infinite;
+}
+
+@keyframes pulse-banner {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.scam-domain {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #ffaaaa;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.countdown-box {
+  background: var(--scam-red);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 20px rgba(230, 57, 70, 0.6);
+}
+
+@keyframes blink {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.prize-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--scam-gold);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.prize-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
+}
+
+.prize-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #333;
+}
+
+.claim-btn {
+  background: linear-gradient(180deg, #ff4444, #cc0000);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  cursor: pointer;
+  animation: shake 3s infinite;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+@keyframes shake {
+  0%, 90%, 100% { transform: translateX(0); }
+  92% { transform: translateX(-5px); }
+  94% { transform: translateX(5px); }
+  96% { transform: translateX(-5px); }
+  98% { transform: translateX(5px); }
+}
+
+.winner-ticker {
+  background: #000;
+  color: var(--scam-gold);
+  padding: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.winner-ticker span {
+  display: inline-block;
+  animation: ticker 20s linear infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.grammar-error {
+  color: #ff6666;
+  font-style: italic;
+}
+
+/* Reveal page */
+.reveal-page {
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal-container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+}
+
+.warning-icon {
+  font-size: 6rem;
+  animation: alert-pulse 1s infinite;
+  color: var(--cyber-red);
+  text-shadow: 0 0 40px var(--cyber-red-glow);
+}
+
+@keyframes alert-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.reveal-title {
+  font-size: 3rem;
+  color: var(--cyber-red);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  animation: fade-in-up 0.8s ease;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal-message {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin: 2rem 0;
+}
+
+.remember-list {
+  text-align: left;
+  background: rgba(255, 45, 85, 0.1);
+  border-left: 4px solid var(--cyber-red);
+  padding: 1.5rem 2rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.remember-list li {
+  margin: 0.75rem 0;
+}
+
+/* Learning section */
+.learn-page {
+  background: var(--cyber-bg);
+  padding: 2rem 0;
+}
+
+.learn-card {
+  background: var(--cyber-card);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s;
+}
+
+.learn-card:hover {
+  border-color: var(--cyber-blue);
+}
+
+.learn-card h3 {
+  color: var(--cyber-blue);
+  margin-top: 0;
+}
+
+/* Quiz */
+.quiz-option {
+  background: var(--cyber-surface);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quiz-option:hover {
+  border-color: var(--cyber-blue);
+}
+
+.quiz-option.selected {
+  border-color: var(--cyber-green);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.quiz-option.correct {
+  border-color: var(--cyber-green);
+  background: rgba(0, 255, 136, 0.2);
+}
+
+.quiz-option.incorrect {
+  border-color: var(--cyber-red);
+  background: rgba(255, 45, 85, 0.2);
+}
+
+/* Certificate */
+.certificate {
+  background: linear-gradient(135deg, #1a1a2e, #0a0a1a);
+  border: 3px solid var(--cyber-gold, var(--cyber-blue));
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+  animation: cert-glow 4s infinite;
+}
+
+@keyframes cert-glow {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+}
+
+.cert-title {
+  font-size: 2rem;
+  color: var(--cyber-blue);
+  font-weight: bold;
+}
+
+.cert-name {
+  font-size: 1.8rem;
+  color: var(--cyber-green);
+  margin: 1rem 0;
+}
+
+/* Simulation form */
+.sim-card {
+  background: var(--cyber-card);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 45, 85, 0.3);
+}
+
+.fake-card-display {
+  background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  text-align: center;
+  border: 2px dashed var(--cyber-muted);
+  color: var(--cyber-muted);
+}
+
+.training-code-box {
+  background: #1a2a1a;
+  border: 2px solid var(--cyber-green);
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 2rem;
+  font-family: var(--font-mono);
+  text-align: center;
+  color: var(--cyber-green);
+  letter-spacing: 8px;
+}
+
+.safety-warning {
+  background: rgba(255, 45, 85, 0.15);
+  border: 1px solid var(--cyber-red);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--cyber-red);
+  animation: alert-pulse 2s infinite;
+}
+
+/* Admin panel */
+.admin-stat-card {
+  background: var(--cyber-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.admin-stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--cyber-blue);
+}
+
+/* Utility */
+.cyber-btn {
+  background: linear-gradient(135deg, var(--cyber-blue), #0088cc);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cyber-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+}
+
+.cyber-btn-danger {
+  background: linear-gradient(135deg, var(--cyber-red), #cc0033);
+  color: white;
+}
+
+.disclaimer-bar {
+  background: rgba(0, 255, 136, 0.1);
+  border-top: 2px solid var(--cyber-green);
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--cyber-green);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.progress-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: var(--cyber-surface);
+  font-size: 0.85rem;
+}
+
+.progress-step.active {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--cyber-blue);
+}
+
+.progress-step.done {
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--cyber-green);
+}
+
+@media (max-width: 768px) {
+  .reveal-title { font-size: 2rem; }
+  .countdown-box { font-size: 1.5rem; }
+  .claim-btn { font-size: 1.2rem; padding: 0.75rem 2rem; }
+  .certificate { padding: 1.5rem; }
+}
