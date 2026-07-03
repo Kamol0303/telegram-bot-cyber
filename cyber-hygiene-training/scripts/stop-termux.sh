@@ -23,9 +23,6 @@ stop_pid_file() {
 
 stop_pid_file "$PID_DIR/backend.pid" "Backend"
 stop_pid_file "$PID_DIR/bot.pid" "Telegram bot"
-
-# Qolgan uvicorn/bot jarayonlarini tozalash
-pkill -f "uvicorn backend.main:app" 2>/dev/null && echo "[+] Qolgan uvicorn jarayonlari to'xtatildi" || true
-pkill -f "python -m bot.main" 2>/dev/null && echo "[+] Qolgan bot jarayonlari to'xtatildi" || true
+bash "$SCRIPT_DIR/stop-training.sh" 2>/dev/null || true
 
 echo "[+] Tayyor"

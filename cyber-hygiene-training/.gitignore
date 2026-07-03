@@ -19,5 +19,7 @@ data/
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# Binaries (ngrok tunnel)
+bin/
+ngrok
+ngrok-stable-*.zip

@@ -17,7 +17,7 @@ from bot.keyboards import (
     remove_keyboard,
     restart_keyboard,
 )
-from bot.services.api_client import create_training_session
+from bot.services.api_client import create_training_session, fetch_tunnel_status
 from bot.states import TrainingFlow
 
 logger = logging.getLogger(__name__)
@@ -78,6 +78,48 @@ async def cmd_start(message: Message, state: FSMContext):
 @router.message(Command("about"))
 async def cmd_about(message: Message):
     await message.answer(ABOUT_TEXT)
+
+
+@router.message(Command("status"))
+async def cmd_status(message: Message):
+    """Show tunnel URL and platform status for training instructors."""
+    status = await fetch_tunnel_status()
+    if not status:
+        await message.answer(
+            "⚠️ <b>Backend ulanmagan</b>\n\n"
+            "Avval platformani ishga tushiring:\n"
+            "<code>bash scripts/start-training.sh</code>"
+        )
+        return
+
+    public = status.get("public_url") or status.get("base_url", "—")
+    tunnel_type = status.get("tunnel_type", "none")
+    active = "✅ Faol" if status.get("active") else "📍 Mahalliy"
+
+    await message.answer(
+        "📡 <b>Platforma holati</b>\n\n"
+        f"🌐 <b>Ommaviy havola:</b>\n<code>{public}</code>\n\n"
+        f"🔗 <b>Tunnel:</b> {tunnel_type}\n"
+        f"📶 <b>Status:</b> {active}\n\n"
+        f"🏠 <b>Mahalliy:</b> <code>{status.get('local_url', 'http://127.0.0.1:8000')}</code>\n\n"
+        "<i>⚠️ Ta'lim simulyatsiyasi — ishtirokchilarga bot orqali /start yuboring.</i>"
+    )
+
+
+@router.message(Command("tunnel"))
+async def cmd_tunnel(message: Message):
+    await message.answer(
+        "🔧 <b>Tunnel sozlash (zphisher usulida)</b>\n\n"
+        "Internetdan kirish uchun platformani tunnel bilan ishga tushiring:\n\n"
+        "<code>bash scripts/start-training.sh</code>\n\n"
+        "Tanlovlar:\n"
+        "1️⃣ LocalHost (Wi-Fi)\n"
+        "2️⃣ Ngrok\n"
+        "3️⃣ Serveo\n"
+        "4️⃣ Localhost.run\n\n"
+        "Tunnel ishga tushgach, <code>/status</code> buyrug'i bilan havolani ko'ring.\n\n"
+        "<i>Faqat ta'lim maqsadida — phishing qanday ishlashini ko'rsatish uchun.</i>"
+    )
 
 
 @router.callback_query(F.data == "about_training")

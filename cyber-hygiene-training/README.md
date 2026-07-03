@@ -47,17 +47,15 @@ docker compose up --build
 
 ## Termux (Android telefon)
 
-Telefonda Termux orqali ishga tushirish:
-
 ```bash
-cd cyber-hygiene-training
-bash scripts/termux-setup.sh    # bir marta — o'rnatish
-nano .env                        # token va parolni sozlash
-bash scripts/start-termux.sh    # ishga tushirish
-bash scripts/stop-termux.sh     # to'xtatish
+bash scripts/termux-setup.sh    # bir marta
+nano .env
+bash scripts/start-training.sh # tunnel tanlash bilan
 ```
 
-Batafsil o'zbekcha qo'llanma: [docs/TERMUX_UZ.md](docs/TERMUX_UZ.md)
+Tunnel turlari (zphisher dan): LocalHost, Ngrok, Serveo, Localhost.run
+
+Batafsil: [docs/TERMUX_UZ.md](docs/TERMUX_UZ.md)
 
 ## URLs
 

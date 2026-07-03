@@ -32,7 +32,7 @@ fi
 # Tizim paketlarini o'rnatish
 info "Termux paketlari o'rnatilmoqda..."
 pkg update -y
-pkg install -y python python-pip git rust libffi openssl
+pkg install -y python python-pip git rust libffi openssl openssh curl unzip
 
 # Virtual muhit
 if [ ! -d "venv" ]; then

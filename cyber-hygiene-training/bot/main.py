@@ -12,6 +12,8 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
+from aiogram.types import BotCommand
+
 from bot.config import bot_settings
 from bot.handlers import register_handlers
 
@@ -32,6 +34,14 @@ async def main() -> None:
         token=bot_settings.telegram_bot_token,
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
     )
+
+    await bot.set_my_commands([
+        BotCommand(command="start", description="Ta'lim simulyatsiyasini boshlash"),
+        BotCommand(command="status", description="Platforma va tunnel holati"),
+        BotCommand(command="tunnel", description="Tunnel sozlash yo'riqnomasi"),
+        BotCommand(command="about", description="Loyiha haqida"),
+    ])
+
     dp = Dispatcher(storage=MemoryStorage())
     register_handlers(dp)
 

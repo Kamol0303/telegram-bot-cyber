@@ -89,24 +89,47 @@ ip route get 1 | awk '{print $7; exit}'
 
 ---
 
-## 5-qadam: Ishga tushirish
+## 5-qadam: Ishga tushirish (tunnel bilan)
+
+```bash
+bash scripts/start-training.sh
+```
+
+Tunnel menyusi chiqadi (zphisher usulida):
+
+```
+[1] LocalHost (Wi-Fi)
+[2] Ngrok.io          ← tavsiya (internet uchun)
+[3] Serveo.net
+[4] Localhost.run
+[5] Tunnel yo'q
+```
+
+Termux uchun qisqa yo'l (xuddi shu skript):
 
 ```bash
 bash scripts/start-termux.sh
 ```
 
-Muvaffaqiyatli bo'lsa, quyidagicha xabar chiqadi:
+Muvaffaqiyatli bo'lsa, ommaviy havola ko'rsatiladi:
 
 ```
-[+] Platforma ishga tushdi!
-
-  Telefon brauzeri:  http://127.0.0.1:8000
-  Admin panel:       http://127.0.0.1:8000/admin
+Ommaviy havola: https://xxxx.ngrok-free.app
+Telegram: Botga /start yuboring
+Status:   Botga /status yuboring
 ```
 
 ---
 
-## 6-qadam: Tekshirish
+## 6-qadam: To'xtatish
+
+```bash
+bash scripts/stop-training.sh
+```
+
+---
+
+## 7-qadam: Tekshirish
 
 ### Brauzerda (telefonda)
 
@@ -118,12 +141,24 @@ termux-open-url http://127.0.0.1:8000
 
 Yoki brauzerda `http://127.0.0.1:8000` manzilini oching.
 
-### Telegram botda
+### Telegram bot buyruqlari
 
-1. BotFather da yaratgan botingizni oching
-2. `/start` yuboring
-3. Ism va telefon raqamini kiriting (simulyatsiya uchun)
-4. **"Continue Simulation"** tugmasini bosing
+| Buyruq | Vazifa |
+|--------|--------|
+| `/start` | Simulyatsiyani boshlash |
+| `/status` | Tunnel va platforma holati |
+| `/tunnel` | Tunnel sozlash yo'riqnomasi |
+| `/about` | Loyiha haqida |
+
+### Ngrok sozlash (tavsiya etiladi)
+
+1. https://dashboard.ngrok.com dan ro'yxatdan o'ting
+2. Authtoken oling
+3. `.env` ga qo'shing:
+
+```env
+NGROK_AUTHTOKEN=sizning-tokeningiz
+```
 
 ---
 

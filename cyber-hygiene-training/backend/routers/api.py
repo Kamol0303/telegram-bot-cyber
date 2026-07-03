@@ -24,6 +24,7 @@ from backend.services.session_service import (
     is_session_valid,
     update_session_progress,
 )
+from backend.services.url_service import get_base_url, get_tunnel_info
 
 router = APIRouter(prefix="/api", tags=["api"])
 settings = get_settings()
@@ -39,9 +40,10 @@ async def create_training_session(
     No personal data is stored — only a hashed Telegram ID for analytics.
     """
     session = await create_session(db, body.telegram_user_id)
+    base = get_base_url()
     return SessionCreateResponse(
         token=session.token,
-        simulation_url=f"{settings.base_url}/?token={session.token}",
+        simulation_url=f"{base}/?token={session.token}",
         expires_at=session.expires_at,
     )
 
@@ -111,3 +113,11 @@ async def submit_quiz_answers(
     if not result:
         raise HTTPException(status_code=400, detail="Invalid session or quiz already completed")
     return QuizSubmitResponse(**result)
+
+
+@router.get("/tunnel/status")
+async def tunnel_status():
+    """Return current public tunnel URL for Telegram bot and admin."""
+    info = get_tunnel_info()
+    info["base_url"] = get_base_url()
+    return info
