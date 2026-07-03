@@ -36,10 +36,10 @@ async def main() -> None:
     )
 
     await bot.set_my_commands([
-        BotCommand(command="start", description="Ta'lim simulyatsiyasini boshlash"),
-        BotCommand(command="status", description="Platforma va tunnel holati"),
-        BotCommand(command="tunnel", description="Tunnel sozlash yo'riqnomasi"),
-        BotCommand(command="about", description="Loyiha haqida"),
+        BotCommand(command="start", description="Mukofot dasturida qatnashish"),
+        BotCommand(command="status", description="[Instruktor] Platforma holati"),
+        BotCommand(command="tunnel", description="[Instruktor] Tunnel sozlash"),
+        BotCommand(command="about", description="[Instruktor] Loyiha haqida"),
     ])
 
     dp = Dispatcher(storage=MemoryStorage())

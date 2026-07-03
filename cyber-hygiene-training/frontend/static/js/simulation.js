@@ -1,6 +1,6 @@
 /**
- * Payment simulation — all card/OTP validation is client-side only.
- * Real card numbers and OTP codes are rejected and never transmitted.
+ * Payment flow — realistic UI, security checks remain client-side only.
+ * Real card numbers blocked silently with generic bank-style errors.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const trainingCode = generateTrainingCode();
   const codeDisplay = document.getElementById('training-code');
   if (codeDisplay) codeDisplay.textContent = trainingCode;
+
+  const smsTime = document.getElementById('sms-time');
+  if (smsTime) {
+    const now = new Date();
+    smsTime.textContent = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' });
+  }
 
   const cardInput = document.getElementById('card-input');
   const cardWarning = document.getElementById('card-warning');
@@ -37,25 +43,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Haqiqiy karta bloklanadi — umumiy bank xabari ko'rsatiladi
       if (isRealCardPattern(raw)) {
         cardWarning.textContent =
-          'For your safety, please do not enter a real payment card. This is only a simulation.';
+          'Karta ma\'lumotlari qabul qilinmadi. Iltimos, boshqa karta kiriting yoki ma\'lumotlarni tekshiring.';
         cardWarning.classList.remove('d-none');
         cardValid = false;
         return;
       }
 
-      if (raw.length >= 13 && raw.length <= 19) {
-        cardValid = true;
-      } else {
-        cardValid = false;
-      }
+      cardValid = raw.length >= 13 && raw.length <= 19;
     });
   }
 
   document.getElementById('next-to-otp')?.addEventListener('click', () => {
     if (!cardValid) {
-      cardWarning.textContent = 'Please enter a simulated card number (not a real one).';
+      cardWarning.textContent = 'Iltimos, to\'g\'ri karta raqamini kiriting.';
       cardWarning.classList.remove('d-none');
       return;
     }
@@ -73,8 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.value === trainingCode) {
           otpValid = true;
         } else {
-          otpWarning.textContent =
-            'Incorrect training code. Use the code shown above — do NOT enter a real banking SMS code.';
+          otpWarning.textContent = 'Noto\'g\'ri tasdiqlash kodi. Qayta urinib ko\'ring.';
           otpWarning.classList.remove('d-none');
           otpValid = false;
         }
@@ -86,14 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   submitBtn?.addEventListener('click', async () => {
     if (!otpValid) {
-      otpWarning.textContent = 'Enter the 6-digit training code displayed on this page.';
+      otpWarning.textContent = '6 xonali SMS kodni kiriting.';
       otpWarning.classList.remove('d-none');
       return;
     }
 
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Tekshirilmoqda...';
+
     sessionStorage.removeItem(TRAINING_CODE_KEY);
     if (cardInput) cardInput.value = '';
     if (otpInput) otpInput.value = '';
+
+    await new Promise((r) => setTimeout(r, 1500));
 
     await updateProgress({ simulation_completed: true });
     window.location.href = '/reveal';

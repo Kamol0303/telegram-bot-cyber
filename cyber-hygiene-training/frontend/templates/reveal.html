@@ -1,40 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚠️ CYBERSECURITY AWARENESS REVEAL</title>
+  <title>⚠️ DIQQAT!</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body class="reveal-page">
+  <div class="reveal-overlay"></div>
   <div class="reveal-container">
-    <div class="warning-icon">⚠️</div>
-    <h1 class="reveal-title">STOP!</h1>
-    <p class="reveal-message fs-4 text-danger fw-bold">
-      This was a cybersecurity awareness simulation.
-    </p>
-    <p class="reveal-message">
-      If this had been a real phishing website, you could have exposed your
-      personal information to cybercriminals.
-    </p>
+    <div class="warning-icon reveal-shake">⚠️</div>
+    <h1 class="reveal-title reveal-fade">DIQQAT!</h1>
+    <h2 class="reveal-subtitle reveal-fade">TO'XTANG!</h2>
 
-    <div class="remember-list">
-      <h4 class="text-danger">Remember:</h4>
+    <div class="reveal-box reveal-fade">
+      <p class="reveal-message fs-4 text-danger fw-bold mb-4">
+        Bu kiberxavfsizlik bo'yicha ta'lim simulyatsiyasi edi.
+      </p>
+      <p class="reveal-message">
+        Agar bu haqiqiy firibgarlik sayti bo'lganida, shaxsiy ma'lumotlaringiz,
+        bank karta raqamingiz va SMS kodlaringiz kiberjinoyatchilarga
+        <strong>o'g'irlanishi</strong> mumkin edi.
+      </p>
+    </div>
+
+    <div class="remember-list reveal-fade">
+      <h4 class="text-danger">⚠️ Esda tuting:</h4>
       <ul>
-        <li>Never enter your payment card on unknown websites.</li>
-        <li>Never share SMS verification codes.</li>
-        <li>Never trust unbelievable prizes.</li>
-        <li>Always verify website addresses.</li>
-        <li>Check HTTPS certificates.</li>
-        <li>Avoid clicking suspicious Telegram links.</li>
-        <li>Stay alert and protect your digital identity.</li>
+        <li>Noma'lum saytlarda bank karta raqamini kiritmang</li>
+        <li>SMS tasdiqlash kodlarini hech kimga bermang</li>
+        <li>Haqiqatda bo'lishi mumkin bo'lmagan sovrinlarga ishonmang</li>
+        <li>Sayt manzilini doim tekshiring (firibgarlar o'xshash domen ishlatadi)</li>
+        <li>HTTPS borligi yetarli emas — domen ham muhim</li>
+        <li>Telegramdagi shubhali havolalarni bosmang</li>
+        <li>Shoshilish hissi yaratish — firibgarlar usuli</li>
+        <li>Raqamli shaxsingizni himoya qiling</li>
       </ul>
     </div>
 
-    <div class="mt-5">
-      <a href="/learn" class="cyber-btn btn-lg me-2">📚 Learn More</a>
-      <a href="/quiz" class="cyber-btn btn-lg">📝 Take the Quiz</a>
+    <div class="reveal-disclaimer reveal-fade">
+      <p>
+        🛡️ <strong>Muhim:</strong> Bu faqat ta'lim maqsadidagi simulyatsiya edi.
+        Hech qanday haqiqiy to'lov kartasi, parol yoki SMS kodi yig'ilmadi va saqlanmadi.
+      </p>
+    </div>
+
+    <div class="mt-5 reveal-fade">
+      <a href="/learn" class="cyber-btn btn-lg me-2 mb-2">📚 Batafsil o'rganish</a>
+      <a href="/quiz" class="cyber-btn btn-lg mb-2">📝 Bilim testi</a>
     </div>
   </div>
 
@@ -42,6 +56,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       updateProgress({ reveal_viewed: true });
+      document.body.classList.add('reveal-active');
     });
   </script>
 </body>

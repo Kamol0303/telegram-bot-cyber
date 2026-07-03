@@ -165,13 +165,14 @@ function startCountdown(elementId, seconds) {
  */
 function initWinnerTicker() {
   const names = [
-    'Akmal T. won BYD Champion!',
-    'Dilnoza K. won iPhone 17!',
-    'Jasur M. won 5,000,000 UZS!',
-    'Nodira S. won Apartment!',
-    'Bobur R. won Luxury Car!',
-    'Malika H. won iPhone 17!',
-    'Sardor A. won 5,000,000 UZS!',
+    'Akmal T. BYD Champion yutdi!',
+    'Dilnoza K. iPhone 17 oldi!',
+    'Jasur M. 5 000 000 UZS yutdi!',
+    'Nodira S. kvartira sohibi bo\'ldi!',
+    'Bobur R. hashamatli avto yutdi!',
+    'Malika H. iPhone 17 qo\'lga kiritdi!',
+    'Sardor A. 5 000 000 UZS oldi!',
+    'Gulnoza P. BYD Champion yutib oldi!',
   ];
   const ticker = document.getElementById('winner-ticker-text');
   if (ticker) {

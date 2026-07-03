@@ -48,12 +48,180 @@ body {
   50% { opacity: 0.85; }
 }
 
-.scam-domain {
+.scam-domain-bad {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: #ffaaaa;
-  text-decoration: line-through;
+  font-size: 0.8rem;
+  color: #4ade80;
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* Realistic bank payment page */
+.bank-page {
+  background: linear-gradient(180deg, #e8eef5 0%, #d0dae8 100%);
+  min-height: 100vh;
+  color: #1a2a3a;
+}
+
+.bank-header {
+  background: #003d7a;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bank-logo {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.bank-secure {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.bank-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 32px rgba(0, 50, 100, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.bank-card-chip {
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(135deg, #d4af37, #f0d060);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.bank-title {
+  color: #003d7a;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.bank-subtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.bank-label {
+  font-size: 0.85rem;
+  color: #444;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.bank-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #dde3ea;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+  transition: border-color 0.2s;
+}
+
+.bank-input:focus {
+  outline: none;
+  border-color: #003d7a;
+}
+
+.bank-otp-input {
+  font-size: 1.5rem;
+  letter-spacing: 8px;
+}
+
+.bank-btn {
+  background: linear-gradient(180deg, #0056b3, #003d7a);
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.bank-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.3);
+}
+
+.bank-btn:disabled {
   opacity: 0.7;
+  cursor: wait;
+}
+
+.bank-error {
+  background: #fff0f0;
+  border: 1px solid #e63946;
+  color: #c0392b;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.bank-footer-note {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+.bank-link {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.bank-trust {
+  color: #888;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+}
+
+.sms-notification {
+  background: #f0f4f8;
+  border: 1px solid #ccd6e0;
+  border-radius: 12px;
+  padding: 1rem;
+  border-left: 4px solid #25d366;
+}
+
+.sms-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.sms-body {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sms-body strong {
+  font-size: 1.2rem;
+  color: #003d7a;
+  letter-spacing: 2px;
 }
 
 .countdown-box {
@@ -147,6 +315,70 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 45, 85, 0.15) 0%, transparent 70%);
+  animation: reveal-pulse-bg 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes reveal-pulse-bg {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.reveal-shake {
+  animation: reveal-shake 0.6s ease-in-out 3;
+}
+
+@keyframes reveal-shake {
+  0%, 100% { transform: translateX(0) scale(1); }
+  20% { transform: translateX(-8px) scale(1.05); }
+  40% { transform: translateX(8px) scale(1.05); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+.reveal-fade {
+  animation: fade-in-up 0.8s ease forwards;
+  opacity: 0;
+}
+
+.reveal-fade:nth-child(2) { animation-delay: 0.2s; }
+.reveal-fade:nth-child(3) { animation-delay: 0.4s; }
+.reveal-fade:nth-child(4) { animation-delay: 0.6s; }
+.reveal-fade:nth-child(5) { animation-delay: 0.8s; }
+.reveal-fade:nth-child(6) { animation-delay: 1s; }
+
+.reveal-subtitle {
+  font-size: 2rem;
+  color: #ff6b6b;
+  font-weight: 900;
+  letter-spacing: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.reveal-box {
+  background: rgba(255, 45, 85, 0.12);
+  border: 2px solid var(--cyber-red);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+}
+
+.reveal-disclaimer {
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid var(--cyber-green);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--cyber-green);
 }
 
 .reveal-container {

