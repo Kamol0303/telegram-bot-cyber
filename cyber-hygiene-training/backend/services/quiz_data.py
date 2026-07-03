@@ -18,7 +18,7 @@ QUIZ_QUESTIONS = [
         "correct": 1,
         "translations": {
             "en": {
-                "question": "You receive a Telegram message claiming you won a luxury car. What should you do first?",
+                "question": "You receive a Telegram message claiming you won an iPhone. What should you do first?",
                 "options": [
                     "Click the link and enter your details to claim the prize",
                     "Verify the sender and never trust unbelievable prizes",
@@ -28,7 +28,7 @@ QUIZ_QUESTIONS = [
                 "explanation": "Unbelievable prizes are a classic scam tactic. Always verify sources and never trust unsolicited win notifications.",
             },
             "uz": {
-                "question": "Telegramda hashamatli avto yutganingiz haqida xabar keldi. Birinchi navbatda nima qilasiz?",
+                "question": "Telegramda iPhone yutganingiz haqida xabar keldi. Birinchi navbatda nima qilasiz?",
                 "options": [
                     "Havolani bosib, mukofotni olish uchun ma'lumotlarni kiritaman",
                     "Yuboruvchini tekshiraman va ishonib bo'lmaydigan sovrinlarga ishonmayman",
@@ -38,7 +38,7 @@ QUIZ_QUESTIONS = [
                 "explanation": "Ishonib bo'lmaydigan sovrinlar — klassik firibgarlik usuli. Manbani tekshiring va kutilmagan g'alaba xabarlariga ishonmang.",
             },
             "ru": {
-                "question": "Вы получили в Telegram сообщение о выигрыше роскошного авто. Что делать в первую очередь?",
+                "question": "Вы получили в Telegram сообщение о выигрыше iPhone. Что делать в первую очередь?",
                 "options": [
                     "Перейти по ссылке и ввести данные для получения приза",
                     "Проверить отправителя и не доверять невероятным призам",
