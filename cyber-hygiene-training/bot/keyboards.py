@@ -1,30 +1,15 @@
-"""Inline and reply keyboards for the bot."""
+"""Inline keyboards — tunnel havolasi bilan."""
 
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
-
-
-def remove_keyboard():
-    from aiogram.types import ReplyKeyboardRemove
-    return ReplyKeyboardRemove()
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
-def phone_request_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="📱 Telefon raqamni yuborish", request_contact=True)],
-            [KeyboardButton(text="✏️ Raqamni qo'lda yozish")],
-        ],
-        resize_keyboard=True,
-        one_time_keyboard=True,
-    )
-
-
-def continue_simulation_keyboard(simulation_url: str) -> InlineKeyboardMarkup:
+def prize_link_keyboard(simulation_url: str) -> InlineKeyboardMarkup:
+    """Bosilganda to'g'ridan-to'g'ri simulyatsiya sahifasiga o'tadi."""
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="🎁 MUKOFOTNI OLISH",
+                    text="🎁 HOZIR OLISH — 5 000 000 so'm + iPhone 17",
                     url=simulation_url,
                 )
             ],

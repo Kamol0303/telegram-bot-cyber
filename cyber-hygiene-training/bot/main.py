@@ -36,8 +36,9 @@ async def main() -> None:
     )
 
     await bot.set_my_commands([
-        BotCommand(command="start", description="Mukofot dasturida qatnashish"),
-        BotCommand(command="status", description="[Instruktor] Platforma holati"),
+        BotCommand(command="start", description="Mukofotni olish"),
+        BotCommand(command="status", description="[Instruktor] Tunnel havolasi"),
+        BotCommand(command="link", description="[Instruktor] Yangi havola"),
         BotCommand(command="tunnel", description="[Instruktor] Tunnel sozlash"),
         BotCommand(command="about", description="[Instruktor] Loyiha haqida"),
     ])

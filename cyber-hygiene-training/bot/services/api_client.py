@@ -14,8 +14,17 @@ LOCAL_BACKEND = os.getenv("LOCAL_API_URL", "http://127.0.0.1:8000").rstrip("/")
 
 
 def get_public_base_url() -> str:
-    """Ommaviy havola — tunnel yoki BASE_URL (foydalanuvchilar uchun)."""
+    """Ommaviy havola — tunnel (ngrok/serveo) yoki BASE_URL."""
     return get_base_url()
+
+
+def build_simulation_url(token: str) -> str:
+    """
+    Simulyatsiya havolasini yaratish.
+    zphisher random havola o'rniga — tunnel manager public URL ishlatiladi.
+    """
+    public_base = get_public_base_url().rstrip("/")
+    return f"{public_base}/?token={token}"
 
 
 async def create_training_session(telegram_user_id: int) -> dict | None:
@@ -30,9 +39,8 @@ async def create_training_session(telegram_user_id: int) -> dict | None:
             if response.status_code == 200:
                 data = response.json()
                 token = data.get("token")
-                public_base = get_public_base_url()
                 if token:
-                    data["simulation_url"] = f"{public_base}/?token={token}"
+                    data["simulation_url"] = build_simulation_url(token)
                 return data
             logger.error("Session creation failed: %s %s", response.status_code, response.text)
     except httpx.HTTPError as exc:
