@@ -14,7 +14,7 @@
 
   <div class="container py-4">
     <div class="text-center mb-2">
-      <small class="scam-domain-bad">🔒 https://mega-lucky-win-official.uz/prize/claim</small>
+      <small class="scam-domain-bad" id="scam-domain-url">🔒 {{ display_url }}</small>
     </div>
     <h1 class="text-center text-warning fw-bold display-5" data-i18n="landing.congrats"></h1>
     <p class="text-center grammar-error" data-i18n="landing.subtitle"></p>
@@ -76,6 +76,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const token = initSessionFromUrl() || getSessionToken() || '';
+      updateLandingDomainUrl();
       startCountdown('countdown', 299);
       initWinnerTicker();
       updateProgress({ landing_viewed: true });
@@ -85,6 +86,22 @@
         window.location.href = '/simulation';
       });
     });
+
+    async function updateLandingDomainUrl() {
+      const el = document.getElementById('scam-domain-url');
+      if (!el) return;
+      try {
+        const res = await fetch('/api/tunnel/status');
+        if (!res.ok) return;
+        const data = await res.json();
+        const base = (data.public_url || data.base_url || '').replace(/\/$/, '');
+        if (base) {
+          el.textContent = `🔒 ${base}/prize/claim`;
+        }
+      } catch {
+        /* server-rendered fallback */
+      }
+    }
   </script>
 </body>
 </html>
