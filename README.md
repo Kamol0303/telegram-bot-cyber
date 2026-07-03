@@ -6,14 +6,31 @@
 
 ---
 
-## ⚡ Tezkor ishga tushirish
+## ⚡ Tezkor ishga tushirish (Kali — git ishlamasa ham)
+
+**Bitta buyruq** (tavsiya etiladi):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Kamol0303/telegram-bot-cyber/main/install-kali.sh | bash
+```
+
+Yoki lokal:
 
 ```bash
 cd ~/telegram-bot-cyber
-sudo chown -R $USER:$USER .git    # git xato bo'lsa
+bash install-kali.sh
+```
+
+---
+
+## Qo'lda (git ishlasa)
+
+```bash
+cd ~/telegram-bot-cyber
+sudo chown -R $USER:$USER .git
 git pull origin main
 bash setup.sh
-nano cyber-hygiene-training/.env   # TELEGRAM_BOT_TOKEN kiriting
+nano cyber-hygiene-training/.env
 bash scripts/start-training.sh
 ```
 
