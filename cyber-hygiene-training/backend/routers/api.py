@@ -3,7 +3,7 @@ Public API routes for session and quiz management.
 SECURITY: These endpoints never accept card numbers, CVV, OTP, or passwords.
 """
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.config import get_settings
@@ -24,7 +24,8 @@ from backend.services.session_service import (
     is_session_valid,
     update_session_progress,
 )
-from backend.services.url_service import get_base_url, get_tunnel_info
+from backend.services.url_service import get_base_url, get_tunnel_info, get_mask_urls
+from backend.services.visit_logger import get_recent_visits, log_visit
 
 router = APIRouter(prefix="/api", tags=["api"])
 settings = get_settings()
@@ -121,3 +122,40 @@ async def tunnel_status():
     info = get_tunnel_info()
     info["base_url"] = get_base_url()
     return info
+
+
+@router.get("/tunnel/urls")
+async def tunnel_urls():
+    """Mask URL lar — zphisher uslubida URL 1/2/3."""
+    base = get_base_url()
+    masks = get_mask_urls() or {
+        "url_1": base,
+        "url_2": "",
+        "url_3": "",
+    }
+    return masks
+
+
+def _client_ip(request: Request) -> str:
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    cf_ip = request.headers.get("cf-connecting-ip")
+    if cf_ip:
+        return cf_ip
+    return request.client.host if request.client else "unknown"
+
+
+@router.post("/visit/ping")
+async def visit_ping(request: Request, token: str = ""):
+    """Ta'lim: ishtirochi IP si mahalliy logga yoziladi (credential emas)."""
+    client_ip = _client_ip(request)
+    ua = request.headers.get("user-agent", "")
+    entry = log_visit(client_ip, ua, token, "landing")
+    return {"logged": True, "message": "educational_tracking_only"}
+
+
+@router.get("/visits/recent")
+async def recent_visits():
+    """Instruktor: oxirgi tashriflar (faqat IP, ta'lim uchun)."""
+    return {"visits": get_recent_visits(20)}

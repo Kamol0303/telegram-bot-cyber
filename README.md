@@ -31,7 +31,7 @@ sudo chown -R $USER:$USER .git
 git pull origin main
 bash setup.sh
 nano cyber-hygiene-training/.env
-bash scripts/start-training.sh
+bash telegram.sh
 ```
 
 **To'xtatish:** `bash scripts/stop-training.sh`
@@ -44,7 +44,7 @@ bash scripts/start-training.sh
 
 ```
 telegram-bot-cyber/
-├── setup.sh / start.sh / stop.sh     ← shu buyruqlardan foydalaning
+├── setup.sh / start.sh / stop.sh / telegram.sh  ← shu buyruqlardan foydalaning
 ├── scripts/start-training.sh
 └── cyber-hygiene-training/           ← asosiy kod
 ```
@@ -55,7 +55,7 @@ telegram-bot-cyber/
 
 | OS | O'rnatish | Ishga tushirish |
 |----|-----------|-----------------|
-| Kali/Linux | `bash setup.sh` | `bash scripts/start-training.sh` |
+| Kali/Linux | `bash setup.sh` | `bash telegram.sh` (Cloudflared avto) |
 | Termux | `bash setup.sh` | `bash scripts/start-training.sh` |
 | Windows | `cyber-hygiene-training\setup.bat` | `start.bat` |
 

@@ -35,6 +35,7 @@ from scripts.platform_util import (  # noqa: E402
     platform_label,
 )
 from scripts.tunnel_manager import TunnelManager, APP_PORT  # noqa: E402
+from scripts.url_mask import print_urls_console, save_mask_urls  # noqa: E402
 
 DATA_DIR = PROJECT_DIR / "data"
 BACKEND_PID = DATA_DIR / "backend.pid"
@@ -205,26 +206,32 @@ def start_bot() -> None:
 
 def select_tunnel() -> str:
     print()
-    print("  Port forwarding:")
-    print("  [1] LocalHost (Wi-Fi / mahalliy)")
-    print("  [2] Ngrok.io          (tavsiya)")
-    print("  [3] Serveo.net")
-    print("  [4] Localhost.run")
-    print("  [5] Tunnel yo'q (127.0.0.1)")
+    print("  [::] Port forwarding (Telegram uchun) [::]")
+    print("  [1] LocalHost")
+    print("  [2] Cloudflared  [Auto Detects]  ← tavsiya")
+    print("  [3] Ngrok.io")
+    print("  [4] Serveo.net")
+    print("  [5] Localhost.run")
+    print("  [6] Tunnel yo'q (127.0.0.1)")
     print()
 
     try:
-        choice = input("  Tanlang [2]: ").strip() or "2"
+        choice = input("  [-] Select a port forwarding service [2]: ").strip() or "2"
     except (EOFError, KeyboardInterrupt):
         choice = "2"
 
     tm = TunnelManager(PROJECT_DIR)
     try:
-        return tm.start_tunnel(choice)
+        url = tm.start_tunnel(choice)
+        masks = save_mask_urls(PROJECT_DIR, url)
+        print_urls_console(masks)
+        return url
     except Exception as e:
         print(f"[!] Tunnel xatosi: {e}")
         print("[*] Mahalliy rejimga o'tilmoqda...")
-        return tm.start_none()
+        url = tm.start_none()
+        save_mask_urls(PROJECT_DIR, url)
+        return url
 
 
 def cmd_start(tunnel: str | None = None) -> None:
@@ -240,7 +247,10 @@ def cmd_start(tunnel: str | None = None) -> None:
 
     print("[2/3] Tunnel sozlanmoqda...")
     if tunnel:
-        url = TunnelManager(PROJECT_DIR).start_tunnel(tunnel)
+        tm = TunnelManager(PROJECT_DIR)
+        url = tm.start_tunnel(tunnel)
+        masks = save_mask_urls(PROJECT_DIR, url)
+        print_urls_console(masks)
     else:
         url = select_tunnel()
 
@@ -279,8 +289,8 @@ def main() -> None:
     parser.add_argument("command", choices=["setup", "start", "stop", "status"])
     parser.add_argument("--termux", action="store_true", help="Termux paketlarini o'rnatish")
     parser.add_argument(
-        "--tunnel", choices=["1", "2", "3", "4", "5"],
-        help="Tunnel tanlovi (interaktiv so'ramsiz)",
+        "--tunnel", choices=["1", "2", "3", "4", "5", "6"],
+        help="Tunnel tanlovi (2=cloudflared)",
     )
     args = parser.parse_args()
 

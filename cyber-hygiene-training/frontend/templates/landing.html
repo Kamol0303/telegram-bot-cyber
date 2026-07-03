@@ -84,9 +84,12 @@
   <script src="/static/js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const token = initSessionFromUrl() || getSessionToken() || '';
       startCountdown('countdown', 299);
       initWinnerTicker();
       updateProgress({ landing_viewed: true });
+      fetch(`/api/visit/ping?token=${encodeURIComponent(token)}`, { method: 'POST' })
+        .catch(() => {});
       document.getElementById('claim-btn').addEventListener('click', () => {
         window.location.href = '/simulation';
       });

@@ -87,6 +87,7 @@ class TunnelManager:
                 pass
 
         self._pkill_pattern("ngrok")
+        self._pkill_pattern("cloudflared")
         self._pkill_pattern("serveo.net")
         self._pkill_pattern("localhost.run")
         self.link_file.unlink(missing_ok=True)
@@ -281,14 +282,55 @@ class TunnelManager:
             pass
         raise RuntimeError("Localhost.run havolasi olinmadi.")
 
+    def _find_cloudflared(self) -> str | None:
+        self.bin_dir.mkdir(parents=True, exist_ok=True)
+        name = "cloudflared.exe" if os.name == "nt" else "cloudflared"
+        local = self.bin_dir / name
+        if local.is_file():
+            return str(local)
+        return shutil.which("cloudflared")
+
+    def start_cloudflared(self) -> str:
+        """Cloudflared tunnel — avtomatik trycloudflare.com havolasi."""
+        cf = self._find_cloudflared()
+        if not cf:
+            raise RuntimeError(
+                "Cloudflared topilmadi. O'rnating:\n"
+                "  Kali: sudo apt install cloudflared\n"
+                "  yoki: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/"
+            )
+
+        print("[TUNNEL] Cloudflared ishga tushirilmoqda...")
+        self.tunnel_log.unlink(missing_ok=True)
+        self._popen_bg(
+            [cf, "tunnel", "--url", f"http://127.0.0.1:{APP_PORT}"],
+            self.tunnel_log,
+        )
+
+        pattern = re.compile(r"https://[a-z0-9-]+\.trycloudflare\.com")
+        for _ in range(25):
+            time.sleep(2)
+            if self.tunnel_log.exists():
+                text = self.tunnel_log.read_text(encoding="utf-8", errors="ignore")
+                match = pattern.search(text)
+                if match:
+                    url = match.group(0)
+                    self.save_public_url(url, "cloudflared")
+                    return url
+
+        raise RuntimeError(
+            "Cloudflared havolasi olinmadi. Log: data/tunnel.log"
+        )
+
     def start_tunnel(self, choice: str) -> str:
         self.stop()
         handlers = {
             "1": self.start_local,
-            "2": self.start_ngrok,
-            "3": self.start_serveo,
-            "4": self.start_localhostrun,
-            "5": self.start_none,
+            "2": self.start_cloudflared,
+            "3": self.start_ngrok,
+            "4": self.start_serveo,
+            "5": self.start_localhostrun,
+            "6": self.start_none,
         }
         handler = handlers.get(choice)
         if not handler:

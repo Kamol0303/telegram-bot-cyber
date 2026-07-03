@@ -72,10 +72,14 @@ ADMIN_PASSWORD=admin-parol
 ```
 
 ```bash
-# 6. Ishga tushirish
-bash scripts/start-training.sh
+# 6. Cloudflared (tavsiya — avtomatik havola)
+sudo apt install -y cloudflared
 
-# 7. To'xtatish
+# 7. Telegram rejimi (zphisher uslubida — avto havola + mask URL)
+bash telegram.sh
+# yoki: bash scripts/start-training.sh
+
+# 8. To'xtatish
 bash scripts/stop-training.sh
 ```
 
@@ -86,9 +90,11 @@ bash scripts/stop-training.sh
 | Harakat | Buyruq (repo ildizidan) |
 |---------|-------------------------|
 | O'rnatish | `bash setup.sh` |
+| Telegram rejimi | `bash telegram.sh` (Cloudflared avto) |
 | Ishga tushirish | `bash scripts/start-training.sh` |
 | To'xtatish | `bash scripts/stop-training.sh` |
 | Holat | `cd cyber-hygiene-training && python3 scripts/launcher.py status` |
+| Tashrif IP | `auth/ip.txt` yoki `/visits` (bot) |
 
 Windows: `setup.bat`, `start.bat`, `stop.bat` (`cyber-hygiene-training` ichida)
 

@@ -31,8 +31,8 @@ echo ""
 info "Tizim paketlari tekshirilmoqda..."
 if command -v apt >/dev/null 2>&1; then
   sudo apt update -qq
-  sudo apt install -y python3 python3-venv python3-pip git curl openssh-client unzip 2>/dev/null || \
-  apt install -y python3 python3-venv python3-pip git curl openssh-client unzip 2>/dev/null || true
+  sudo apt install -y python3 python3-venv python3-pip git curl openssh-client unzip cloudflared 2>/dev/null || \
+  apt install -y python3 python3-venv python3-pip git curl openssh-client unzip cloudflared 2>/dev/null || true
 fi
 
 clone_fresh() {
@@ -97,7 +97,7 @@ if grep -q "your-telegram-bot-token-from-botfather" "$ENV_FILE" 2>/dev/null; the
   echo ""
   echo "Keyin ishga tushiring:"
   echo "  cd $INSTALL_DIR"
-  echo "  bash scripts/start-training.sh"
+  echo "  bash telegram.sh"
   echo ""
   exit 0
 fi
@@ -106,11 +106,11 @@ echo ""
 read -rp "Hozir ishga tushirilsinmi? [Y/n]: " ans
 ans="${ans:-Y}"
 if [[ "$ans" =~ ^[Yy]$ ]]; then
-  bash scripts/start-training.sh
+  bash telegram.sh
 else
   echo ""
   ok "Tayyor! Ishga tushirish:"
   echo "  cd $INSTALL_DIR"
-  echo "  bash scripts/start-training.sh"
+  echo "  bash telegram.sh"
   echo ""
 fi
